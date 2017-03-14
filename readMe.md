@@ -11,3 +11,5 @@ babel将jsx中的DOM编译为 React.createElement()
 
 react构建的应用一般只有一个DOM根节点。但是当整合React到已经存在的应用中时，可以设置多个分离的DOM根节点。
 
+react组件的命名以大写字母开头
+
