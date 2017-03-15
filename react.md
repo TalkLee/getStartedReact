@@ -82,7 +82,50 @@ React元素除了可以表示DOM结构外，还可以表示用户自定义组件
 
 纯函数：不改变输入数据的函数
 
-    所有React组件都表现为类似纯函数，不对其props产生影响
+__所有React组件都表现为类似纯函数，不对其props产生影响__
+
+
+
+#### 状态和生命周期
+
+ReactDOM.render(reactElement,container ) 修改渲染输出
+
+状态和props类似，但是状态为private，完全由组件本身控制。
+
+class式声明组件的另一个好处就是实现本地状态(private state)
+除此之外另一个特性就是生命周期挂钩
+
+##### 函数式声明组件 => 类式声明组件:
+
+1. 创建ES6 类 (类名与函数名、React组件名相同) 继承自 React.Component
+2. 添加一个单独的空方法叫做render
+3. 将函数中函数体移到render方法中
+4. 在render方法中用this.props替换函数中的props
+5. 删除之前的函数声明
+
+
+##### 给React组件类添加本地状态
+
+1. 在render方法中将props对象中属性用state对象的同名属性代替
+2. 添加一个类构造函数(传入参数props)来初始化this.state对象(该构造函数还需要调用基类React.Component的构造函数)
+
+
+##### 给React组件类添加生命周期方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
