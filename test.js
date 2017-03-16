@@ -169,3 +169,209 @@ class Clock extends: React.Component {
 }
 
 
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()} ;
+    }
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),   // 定时调用该方法,tick方法设置date属性
+            1000
+        );
+    }
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Hello，World!</h1>
+                <h2>It is {this.state.date.toLocaleDateString()}.</h2>
+            </div>
+        );
+    }
+}
+
+
+this.setState(function(prevState,props) {
+    return {
+        counter:  prevState.counter + props.increment
+    }
+});
+
+this.setState((prevState,props) => ({
+    counter: prevState.counter + props.increment
+}));
+
+constructor(props) {
+    super(props);
+    this.state = {
+        posts: [],
+        comments: []
+    }
+}
+
+<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+
+<button onClick="activateLasers()">
+</button>
+
+<button onClick={}
+
+function ActionLink() {
+    function handleClick(e) {
+        e.preventDefault();
+    }
+    return (
+        <a href="#" onClick={handleClick}>
+            Click me
+        </a>
+    )
+}
+
+function UserGreeting(props) {
+    return  <h1>Welcome back!</h1>;
+}
+function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+}
+
+function Greetign(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if(isLoggedIn) {
+        return <UserGreeting />;
+    } else {
+        return <GuestGreeting />;
+    }
+}
+
+function LoginButton(props) {
+    return (
+        <button onClick={props.onClick} >
+        Login
+        </button>
+    );
+}
+
+function LogoutButton(props) {
+    return (
+        <button onClick={props.onClick} >
+        Logout
+        </button>
+    );
+}
+
+class LoginControl extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+        this.state = {isLoggedIn: false};
+    }
+    handleLoginClick() {
+        this.setState({isLoggedIn: true});
+    }
+    handleLoginClick() {
+        this.setState({isLoggedIn: false});
+    }
+    render() {
+        const isLoggedIn = this.state.isLoggedIn;
+        let button = null;
+        if(isLoggedIn) {
+            button = <LogoutButton onClick={this.handleLogoutClick}/>;
+        } else {
+            button = <LoginButton onClick={this.handleLoginClick}/>;
+        }
+
+        return (
+            <div>
+            <Greeting isLoggedIn = {isLoggedIn}/>
+            {button}
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <LoginControl />,
+    document.getElementById("root")
+);
+
+function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+        <div>
+            <h1>Hello!</h1>
+            {unreadMessages.length > 0 }
+        </div>
+    )
+}
+
+function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+        <div>
+            <h1>
+                Hello!
+            </h1>
+            {unreadMessages.length > 0  && <h2>adadasd</h2> }
+        </div>
+    );
+}
+const messages = ["rEACT","123"];
+ReactDOM.render(
+    <Mailbox unreadMessages={messages}/>,
+    document.getElementById("root")
+);
+
+
+render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    return (
+        <div>
+        The user is <b>{isLoggedIn ? "current" : "note" }</b> logged in.
+        </div>
+    );
+}
+
+function WarningBanner(props) {
+    if(!props.warn) {
+        return null;
+    }
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+class Page extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {showWarning: true}
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+    handleToggleClick() {
+        this.setState(prevState => ({
+            showWarning: !prevState.showWarning
+        }));
+    }
+    render() {
+        return (
+            <div>
+                <WarningBanner warn={this.state.showWarning} />
+                <button onClick={this.handleToToggleClick}>
+                    {this.state.showWarning ? "Hide" : "Show"}
+                </button>
+            </div>
+        );
+    }
+}
+
+
