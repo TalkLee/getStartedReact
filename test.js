@@ -402,7 +402,138 @@ function Mailbox(props) {
 
     const numbers = [1, 2, 3, 4, 5, 6];
     const listItem = numbers.map((number) =>
-        <
-        li > { number } < /li>
+        <li> { number } < /li>
     )
+
+
+    const listItem = numbers.map( (number) => 
+        <li>{number}</li>
+    )
+
+    ReactDOM.render(
+        <ul>{listItems}</ul>,
+        document.getElementById("root")
+    );
+
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) => 
+            <li key={number.toString()}>{number}</li>
+        );
+        return (
+            <ul>{listItems}</ul>
+        );
+    }
+
+    const numbers = [1,2,3,4,5];
+    ReactDOM.render(
+        <NumberList numbers = {numbers} />,
+        document.getElementById("root")
+    );
+
+    const numbers = [1,2,3,4,5];
+    const listItem = numbers.map((number) => 
+        <li key={number.toString()}>
+            {number}
+        </li>
+    );
+
+
+    const todoItems = todos.map((tood) =>
+        <li key={todo.id}>
+            {todo.text}
+        </li>
+    )
+
+    //不存在ID时，使用下标去标识
+
+    const todoItems = todos.map((todo,index) => 
+        <li key={index}>
+            {todo.text}
+        </li>
+    );
+
+    function ListItem(props) {
+        const value = props.value;
+        return (
+            <li key={value.toString() } >
+                {value}
+            </li>
+        );
+    }
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+            <ListItem value={number} />
+        );
+        return (
+            <ul>
+            {listItems}
+            </ul>
+        );
+    }
+    const numbers = [1,2,3,4,5];
+    ReactDOM.render(
+        <NumberList numbers={numbers} />,
+        document.getElementById("root")
+    );
+
+
+    function ListItem(props) {
+        return <li>{props.value}</li>
+    }
+
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = number.map((number)=> 
+            <ListItem key={number.toString()} value={number}/>
+        );
+        return (
+            <ul>
+                {listItems}
+            </ul>
+        );
+    }
+
+    const numbers = [1,2,3,4,5];
+    ReactDOM.render(
+        <NumberList numbers ={numbers} />,
+        document.getElementById("root")
+    );
+
+
+    functio Blog(props) {
+        const sidebar = (
+            <ul>
+                {props.posts.map((post) => 
+                    <li key={post.id}>
+                        {post.title}
+                    </li>
+                )}
+            </ul>
+        );
+        const content = props.posts.map((post) => 
+            <div key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+            </div>
+        );
+        return (
+            <div>
+                {sidebar}
+                <hr/>
+                {content}
+            </div>
+        );
+    }
+
+    const posts =[
+        {id:2,title:"Hello World", content: "Welcome to learning Reactz!"},
+        {id:2,title:"Test",content:"12123"}
+    ];
+    ReactDOM.render(
+        <Blog posts={posts} />,
+        document.getElementById("root")
+    );
+
     
