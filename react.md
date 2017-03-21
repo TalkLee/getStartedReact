@@ -224,4 +224,6 @@ React中的Form表单的工作与其他DOM元素不同，因为form表单通常�
 因此，textarea的使用方法和其他表单元素相同
 
 ##### select标签
-在HTML中，select标签生成下拉表单
+在HTML中，select标签生成下拉表单。
+在HTML中通过设置selected属性去设置被选中选项。
+在React中则是通过根select标签的value属性去设置选中选项(option的value属性)。在控制组件中这样更加方便，因为你只需要通过在一个位置更新该属性。

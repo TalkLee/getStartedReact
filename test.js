@@ -615,8 +615,36 @@ function Mailbox(props) {
         }
     }
 
+<select>
+    <option value="grapefruit">GrapeFruit</option>
+</select>
 
-    
 
+class FlavorForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: "cocount"  };
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+    handleSubmit(event) {
+        alert("your favorite flavor is:" + this.state.value);
+        event.preventDefault();
+    }
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                Pick your favorite La Croix flavor:
+                <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="cocount">Cocount</option>
+                </select>
+            </form>
+        );
+    }
+}
 
