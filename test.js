@@ -648,3 +648,335 @@ class FlavorForm extends React.Component {
     }
 }
 
+class Reservation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isGoing: true,
+            numberOfGuests: 2
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+    handleInputChange(event) {
+        const target = event.target;
+        const value =target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    } 
+    render() {
+        return (
+            <form>
+                <label>
+                    Is going:
+                    <input 
+                        name="isGoing"
+                        type="checkbox"
+                        checked={this.state.isGoing}
+                        onChange={this.handleInputChange} />
+                </label>
+                <br />
+                <label>
+                    Number of guests:
+                    <input 
+                        name="numberOfGuests"
+                        type="number"
+                        value={this.state.numberOfGuests}
+                        onChange={this.handleInputChange} />
+                </label>
+            </form>
+        );
+    }
+}
+
+function BoilingVerdict(props) {
+    if(props.celsius >= 100 ) {
+        return <p>boil.</p>;
+    } 
+    return <p>not</p>;
+}
+class Calculator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = { temperature: "" };
+    } 
+    handleChange(e) {
+        this.setState({temperature: e.target.value});
+    }
+    render() {
+
+        const temperature = this.state.temperature;
+        return (
+            <fieldset>
+                <legend>Enter</legend>
+                <input value={temperature}
+                onChange={this.handleChange} />
+                <BoilingVerdict
+                    celsius={parseFloat(temperature)}
+            </fieldset>
+        )
+    }
+}
+
+const scaleNames = {
+    c: 'Celsius',
+    f: 'Fahrenheit'
+};
+
+class TemperaturInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleCHnage = this.hanldeChange.bind(this);
+        this.state = {temperature: ''};
+    }
+    handleChange(e) {
+        this.setState({temperature: e.target.value});
+    }
+    render() {
+        const temperature = this.state.temperature;
+        const scale = this.props.scale;
+        return (
+            <fieldset>
+                <legend>Enter</legend>
+                <input value={temperature}
+                    onChange={this.handleChange} />
+            </fieldset>    
+        );
+    }
+}
+
+class Calculator extends React.Component {
+    render()  {
+        return (
+            <div>
+                <TemperatureInput scale="c" />
+                <TemperatureInput scale="f" />
+            </div>
+        )
+    }
+}
+
+function toCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 /9;
+}
+
+function toFahrenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
+}
+
+function tryConvert(temperature, convert) {
+    const input = parseFloat(temperature);  
+    if(Number.isNaN(input)) {
+        return '';
+    }
+    const output = conver(input);
+    const rounded = Math.round(output * 1000 ) /100;
+    return rounded.toString();
+}
+
+function FancyBorder(props) {
+    return (
+        <div className={"FancyBorder FancyBorder-" + props.color}>
+        {props.children}
+        </div>
+    );
+}
+
+function WelcomeDialog() {
+    return (
+        <FancyBorder color="blue">
+            <h1 className="Dialog-title">
+            Welcome
+            </h1>
+            <p className="Dialog-message">
+                Thank you for visiting our 
+            </p>
+        </FancyBorder>
+    );
+}
+
+function SplitPane(props) {
+    return ( 
+        <div className="SplitPane">
+            <div className="SplitPane-left">
+                {props.left}
+            </div>
+            <div className-"SplitPane-right">
+                {props.right}
+            </div>
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <SplitPane
+            left={ <Contacts /> }
+            right={<Chat />}
+        />
+    );
+}
+
+function Dialog(props) {
+    return (
+        <FancyBorder color="blue">
+            <h1 className="Dialog-title">
+                {props.title}
+            </h1>
+            <p className="Dialog-message">
+                {props.message}
+            </p>
+        </FancyBorder>
+    );
+}
+
+function WelcomeDialog() {
+    return (
+        <Dialog 
+        title="Welcome"
+        message="Thank your"
+        />
+    );
+}
+
+class Dialog extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        <FancyBorder color="blue">
+            <h1 className="Dialog-title">
+                {props.title}
+            </h1>
+            <p className="Dialog-message">
+                {props.message}
+            </p>
+            {props.children}
+        </FancyBorder>
+    }
+}
+
+class SignupDialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSignup = this.handleSignup.bind(this);
+        this.state = {login: ''};
+    }
+    render() {
+        return (
+        <Dialog title="adas"
+            message="123">
+            <input value={this.state.login} 
+                onChange={this.handleChange} />
+            <button onClick={this.handleSignup}>
+            Sign Up!
+            </button>
+        </Dialog>
+        );
+    };
+    handleChange(e) {
+        this.setState({login:e.target.value});
+    }
+    handleSignup() {
+        alert("aboard, ${this.state.login}");
+    }
+}
+
+class ProductCategoryRow extends React.Component {
+    render() {
+        return (
+            <tr>
+                <th colspan="2">
+                    {this.props.category} 
+                </th>
+            </tr>
+        );
+    }
+}
+
+class ProductRow extends React.Component {
+    render() {
+        var name = this.props.product.stocked ?
+            this.props.product.name :
+            <span style={{color:"red"}}>
+                {this.props.product.name}
+            </span>;
+
+        return (
+            <tr>
+                <td>{name}</td>
+                <td>{this.props.product.price}</td>
+            </tr>
+        );
+    }
+}
+
+class ProductTable extends React.Component {
+    render() {
+        var rows = [];
+        var lastCatagory = null;
+        this.props.products.forEach(function(product) {
+            if(product.category != lastCatagory) {
+                row.push(<ProductCategoryRow catagory={product.catagory} key={product.category} /> );
+            }
+                row.push(<ProductRow product={product} key={product.name} />);
+                lastCatagory = product.catagory;
+        });
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {row}
+                </tbody>
+        );
+    }
+}
+
+class SearchBar extends React.Component {
+    render() {
+        return (
+            <form>
+                <input type='text' palceholder="123" />
+                <p>
+                    <input type="checkbox" />
+                    {''}
+                </p>
+            </form>
+        );
+    }
+}
+
+class FilterableProductTable extends React.Component {
+    render() {
+        return (
+            <div>
+                <SearchBar />
+                <ProductTable products = {this.props.products} />
+            </div>
+        );
+    }
+}
+
+var PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
+React.rener(
+    <FilterableProductTable products={PRODUCTS} />,
+    document.getElementById("root")
+);
+
