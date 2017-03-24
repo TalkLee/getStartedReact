@@ -980,3 +980,183 @@ React.rener(
     document.getElementById("root")
 );
 
+
+class ProductCategoryRow extends React.Component {
+    render() {
+        return (
+            <tr>
+                <th colSpan="2">
+                    {this.props.catagory}
+                </th>
+            </tr>
+        );
+    }
+}
+
+class ProductRow extends React.Component {
+    render() {
+        var name = this.props.product.stocked ? this.props.product.name : <span stlye={{color:'red'}}> {this.props.product.name} </span>;
+        return (
+            <tr>
+                <td>{name}</td>
+                <td>{this.props.product.price}</td>
+            </tr>
+        );
+    }
+}
+
+class ProductTable extends React.Component {
+    render() {
+        var rows = [];
+        var lastCatagory = null;
+        this.props.products.forEach((product) => {
+            if(product.name.indexOf(this.props.filterText) == -1 (!product.stocked && this.props.inStockOnly)) {
+                return ;
+            }
+            if(product.category != lastCatagory) {
+                rows.push(<ProductCategoryRow category={product.category} key={product.category} /> );
+            }
+            rows.push(<ProductRow product={product} key={product.name} />);
+            lastCatagory = product.catagory;
+        })
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {rows}
+                </tbody>
+            </table>
+        );
+    }
+}
+
+class SearchBar extends React.Component {
+    render() {
+        return (
+            <form>
+                <input type='text' placeholder='12'
+                value={this.props.filterText} />
+                <p>
+                    <input type='checkbox' checked={this.props.isStockOnly} />
+                    {" "}
+                </p>
+            </form>
+        );
+    }
+}
+
+class FilterableProductTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterText: "",
+            isStockOnly: false
+        };
+    }
+    render() {
+        return (
+            <div>
+                <SearchBar
+                    filterText={this.state.filterText}
+                    inStockOnly={this.state.isStockOnly}
+                />
+                <ProductTable
+                    products={this.props.products}
+                    filterText={this.state.filterText}
+                    inStockOnly={this.state.isStockOnly}
+                />
+            </div>
+        );
+    }
+}
+
+var PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
+ReactDOM.render(
+    <FilterableProductTable products={PRODUCTS} />,
+    document.getElementById("root")
+);
+
+React.createElement(component,props,..chidren)
+
+<MyButton color="blue" shadowSize={2}>  
+    Click me 
+</MyButton>
+
+React.createElement(
+    MyButton,
+    {color: 'blue', shadowSize:2},
+    'Click me'
+);
+
+import React from 'react'
+
+const MyComponent = {
+    DatePicker: function(props) {
+        return <div>Imagine a {props.color} datepicker </div>;
+    }
+}
+
+function BlueDatePicker() {
+    return <MyComponent.DatePicker color="blue" />;
+}
+
+import React from 'react';
+
+function hello(props) {
+    return <div>Hello {props.toWhat }</div>;
+}
+
+function Hello(props) {
+    return <div>Hello {props.toWhat} </div>;
+}
+
+function HelloWorld() {
+    return <Hello toWhat="World!" />;
+}
+
+import { PhotoStory, VideoStory } from './stories'
+
+const components = {
+    photo: PhotoStory,
+    video: VideoStory
+};
+
+function Story(props) {
+    return <components[props.storyType] story = 
+}
+
+function App1() {
+    return <Greeting firstName="Ben" lastName="He" />;
+}
+
+function App2() {
+    const props = { firstName : 'Ben', lastName: 'He'};
+    return <Greeting {..props} />;
+}
+
+function Item(props) {
+    return <li>{props.message}</li>;
+}
+
+function TodoList() {
+    const todos = ["finish doc","submit"];
+    return (
+        <ul>
+            {todos.map((message) => <Item key={message} message={message} /> )}
+        </ul>
+    );
+}
+
